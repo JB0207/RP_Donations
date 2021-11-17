@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+
+.iframeWrapper {
+	width: 60vw;
+    margin:auto;
+}
+
+.iframeWrapper iframe {
+    width: 60vw;
+	margin:right: auto;
+	margin-left: auto;
+}
+
+</style>
+
+<script>
+
+// construct an empty object "date" into which the "onload" command in the iframe tag writes the current date and time when a new page is loaded within the iframe. This allows me to identify when a respondent clicked the donate button and match this data with the API data (solves the problem of uniquely identifying donors when multiple donors donate at the same time, as data can be obtained from the API indicating what day and time a donation was created ("created_at" attribute)).
+
+const date = [];
+
+function callBetterPlace() {
+fetch('https://api.betterplace.org/de/api_v4/fundraising_events/39361.json')
+	.then(response => response.json())
+	.then(data => {
+	  console.log(data);
+	  });
+	  
+fetch('https://api.betterplace.org/de/api_v4/fundraising_events/39361/opinions.json?per_page=20&page=1')
+	.then(response => response.json())
+	.then(data2 => {
+	  console.log(data2);
+	  });
+	  
+console.log(date);
+}
+
+</script>
+
+
+<div class="iframeWrapper">
+<iframe frameborder="0" width="1000" height="800" onLoad="date.unshift(Date());" src="https://www.betterplace.org/en/donate/platform/fundraising-events/39361?donation_amount=" scrolling="yes" ></iframe>
+</div>
+
+<center><button style= "margin-top: 30px; margin-bottom: 30px" onclick="callBetterPlace()">Continue (API Call -> look console)</button></center>
+
+
+
+</html>
+
+
+
