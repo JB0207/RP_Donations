@@ -10,7 +10,7 @@
 
 .iframeWrapper iframe {
 	width: 60vw;
-	margin:right: auto;
+	margin-right: auto;
 	margin-left: auto;
 }
 
@@ -21,16 +21,19 @@
 // construct an empty array "date" into which the "onload" command in the iframe tag writes the current date and time when a new page is loaded within the iframe. 
 // This allows me to identify when a respondent clicked the donate button and match this data with the API data 
 // (solves the problem of uniquely identifying donors when multiple donors donate at the same time, as data and time can be obtained from the API indicating what day and time a donation was created ("created_at" attribute)).
-
 const date = [];
 
 function callBetterPlace() {
+	
+// API call to get information on "total number of donations" and "Total amount of donations"
 fetch('https://api.betterplace.org/de/api_v4/fundraising_events/39361.json')
 	.then(response => response.json())
 	.then(data => {
 	  console.log(data);
 	  });
-	  
+
+// API call to get information on "IDs for donations with the information when the donation was created (donation button clicked) and 
+// when the donation was received at betterplace.org and how much the respective amount was"
 fetch('https://api.betterplace.org/de/api_v4/fundraising_events/39361/opinions.json?per_page=20&page=1')
 	.then(response => response.json())
 	.then(data2 => {
