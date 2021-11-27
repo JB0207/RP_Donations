@@ -5,7 +5,7 @@
 
 .iframeWrapper {
 	width: 60vw;
-    	margin:auto;
+    	margin: auto;
 }
 
 .iframeWrapper iframe {
@@ -17,6 +17,18 @@
 </style>
 
 <script>
+	
+// Respondents who use a browser that does not support the fetch command should be excluded from the final survey. 
+// This command only checks if the browser supports the command and displays the result in the console. 
+// In the final survey, this is the first check that is carried out and if it is not supported, respondents cannot take part in the survey.
+
+if ("fetch" in window) {
+    console.log("fetch works!")
+}
+else{
+     console.log("fetch does not work!")
+}
+	
 
 // construct an empty array "date" into which the "onload" command in the iframe tag writes the current date and time when a new page is loaded within the iframe. 
 // This allows me to identify when a respondent clicked the donate button and match this data with the API data 
